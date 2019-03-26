@@ -1,4 +1,8 @@
 <div>
   <search-bar></search-bar>
-  MOVIE-LIST
+  <div>
+    <div *ngFor="let movie of movies">
+      <movie-item>{{movie}}</movie-item>
+    </div>
+  </div>
 </div>

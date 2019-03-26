@@ -6,5 +6,5 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieListPageComponent {
-
+  movies: any[] = [1,2,3];  //TODO temp
 }
