@@ -7,7 +7,7 @@ import { NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouterModule } from '@angular-redux/router';
 
 // This app's ngModules
-import { StoreModule } from './store/module';
+import { StoreModule } from './store-v2/module';
 import { AnimalModule } from './animals/module';
 import { ElephantModule } from './elephants/module';
 import { LionModule } from './lions/module';
