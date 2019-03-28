@@ -7,11 +7,7 @@ import { NgReduxModule } from '@angular-redux/store';
 import { NgReduxRouterModule } from '@angular-redux/router';
 
 // This app's ngModules
-import { StoreModule } from './store-v2/module';
-import { AnimalModule } from './animals/module';
-import { ElephantModule } from './elephants/module';
-import { LionModule } from './lions/module';
-import { FeedbackModule } from './feedback/module';
+import { StoreModule } from './store/module';
 import { MovieListPageModule } from './pages/movie-list/module';
 import { MovieDetailPageModule } from './pages/movie-detail/module';
 
@@ -28,10 +24,6 @@ import { AppComponent } from './component';
     HttpModule,
     NgReduxModule,
     NgReduxRouterModule,
-    AnimalModule,
-    ElephantModule,
-    LionModule,
-    FeedbackModule,
     MovieListPageModule,
     MovieDetailPageModule,
     StoreModule,

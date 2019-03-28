@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
-import { IMovieListPageState } from '../../store-v2/model';
+import { IMovieListPageState } from '../../store/model';
 import { Observable } from 'rxjs';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
 

@@ -1,7 +1,7 @@
 <div>
   <search-bar></search-bar>
   <div>
-    <div *ngFor="let movie of state.movies">
+    <div *ngFor="let movie of state?.movies">
       <movie-item>{{movie}}</movie-item>
     </div>
   </div>
