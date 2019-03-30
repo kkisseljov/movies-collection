@@ -1,9 +1,5 @@
-<div>
-    <search-bar></search-bar>
-    <div>
-        <div *ngFor="let movie of movies$ | async">
-            <movie-item>{{movie}}</movie-item>
-        </div>
-        <div>Loading: {{loading$ | async}}</div>
-    </div>
+<search-bar></search-bar>
+<div class="movie-grid">
+    <movie-item *ngFor="let movie of movies$ | async" [movie]="movie"></movie-item>
 </div>
+<div>Loading: {{loading$ | async}}</div>

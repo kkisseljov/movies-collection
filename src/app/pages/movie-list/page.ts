@@ -3,7 +3,7 @@ import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
 import { MovieListPageActions } from './store/actions';
-import { IMovie } from "../../api/movies/movie.model";
+import { IMovie } from '../../api/movies/movie.model';
 
 @Component({
     selector: 'movie-list',
@@ -19,8 +19,6 @@ export class MovieListPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchMovies();
-
-        this.movies$.subscribe((n) => console.log('stored movies:', n));
     }
 
     fetchMovies() {

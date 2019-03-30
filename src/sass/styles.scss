@@ -1,2 +1,9 @@
 @import './variables';
 @import './pages/movie-list';
+
+body {
+    max-width: 900px;
+    min-height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,4 +1,5 @@
-<div>
-  MOVIE PICTURE
-  MOVIE TITLE
+<div class="movie-detail-content" *ngIf="!!movie">
+    <img *ngIf="!!movie.img" [src]="getMovieImg()"/>
+    <p>{{movie.name}}</p>
+    <p>{{movie.rate}}</p>
 </div>

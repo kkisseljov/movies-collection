@@ -1,3 +1,35 @@
 movie-list {
-  color: cornflowerblue;  //JUST TO CHECK SASS INTEGRATION
+    color: cornflowerblue; //JUST TO CHECK SASS INTEGRATION
+
+    .movie-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+movie-item {
+    //182x268
+
+    width: 182px + 24px;
+    height: 268px;
+
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 12px;
+    padding-bottom: 115px;
+
+    margin-top: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+
+    border: 2px solid darkgrey;
+
+    .movie-detail-content {
+        img {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 }
