@@ -5,6 +5,7 @@ import { StoreModule } from '../../store/module';
 import { CoreModule } from '../../core/module';
 import { MovieItemComponent } from './components/movie-item/component';
 import { ApiModule } from '../../api/module';
+import { MovieListPageActions } from './store/actions';
 
 @NgModule({
   declarations: [
@@ -13,5 +14,6 @@ import { ApiModule } from '../../api/module';
   ],
   exports: [MovieListPageComponent],
   imports: [StoreModule, CoreModule, CommonModule, ApiModule],
+  providers: [MovieListPageActions]
 })
 export class MovieListPageModule {}

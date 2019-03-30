@@ -1,8 +1,9 @@
 <div>
-  <search-bar></search-bar>
-  <div>
-    <div *ngFor="let movie of state?.movies">
-      <movie-item>{{movie}}</movie-item>
+    <search-bar></search-bar>
+    <div>
+        <div *ngFor="let movie of movies$ | async">
+            <movie-item>{{movie}}</movie-item>
+        </div>
+        <div>Loading: {{loading$ | async}}</div>
     </div>
-  </div>
 </div>

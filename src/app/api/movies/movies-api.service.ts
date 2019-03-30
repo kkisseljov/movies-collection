@@ -10,16 +10,16 @@ import 'rxjs/add/operator/delay';
 @Injectable()
 export class MoviesApiService {
 
-  getDelayTime = () => 500 + Math.random() * 1000;
+    getDelayTime = () => 500 + Math.random() * 1000;
 
-  view(id: number): Observable<IMovie> {
-    return of(movies)
-      .map((movies) => movies.find((m: IMovie) => m.id === id));
-      //.delay(this.getDelayTime());
-  }
+    view(id: number): Observable<IMovie> {
+        return of(movies)
+            .map((movies) => movies.find((m: IMovie) => m.id === id))
+            .delay(this.getDelayTime());
+    }
 
-  list(): Observable<IMovie[]> {
-    return of(movies)
-      //.delay(this.getDelayTime());
-  }
+    list(): Observable<IMovie[]> {
+        return of(movies)
+            .delay(this.getDelayTime());
+    }
 }
