@@ -1,6 +1,13 @@
 <search-bar [value]="nameFilter$"
             (onSearch$)="onNameFilterChange($event)"
 ></search-bar>
+<div class="movie-filters">
+    <div class="genre-filter-label">Filter by genres:</div>
+    <div class="genre-checkbox" *ngFor="let genre of genres">
+        <input type="checkbox" [value]="genre" (change)="onGenreFilterChange($event)">
+        {{genre}}
+    </div>
+</div>
 <div class="movie-grid">
     <movie-item *ngFor="let movie of movies$ | async" [movie]="movie"></movie-item>
 </div>

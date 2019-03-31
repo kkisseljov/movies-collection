@@ -1,10 +1,29 @@
 movie-list {
 
     search-bar {
-        margin: 12px auto;
         display: flex;
-
+        margin: 12px auto;
         padding: 12px 28px;
+    }
+
+    .movie-filters {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 12px 28px;
+        padding: 12px 28px;
+
+        border: 1px solid black;
+        border-radius: 6px;
+
+        .genre-filter-label {
+            width: 100%;
+            margin: 12px;
+        }
+
+        .genre-checkbox {
+            margin: 8px 8px;
+            min-width: 100px;
+        }
     }
 
     .movie-grid {

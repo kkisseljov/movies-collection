@@ -3,7 +3,7 @@ import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
 import { MovieListPageActions } from './store/actions';
-import { IMovie } from '../../api/movies/movie.model';
+import { GenreType, genreType, IMovie } from '../../api/movies/movie.model';
 import { IMovieListFilters } from './store/interfaces';
 
 @Component({
@@ -14,7 +14,13 @@ import { IMovieListFilters } from './store/interfaces';
 export class MovieListPageComponent implements OnInit {
     @select(['pages', 'movieListPage', 'movies']) movies$: Observable<IMovie[]>;
     @select(['pages', 'movieListPage', 'loading']) loading$: Observable<boolean>;
+
     @select(['pages', 'movieListPage', 'filters', 'byName']) nameFilter$: Observable<string>;
+    @select(['pages', 'movieListPage', 'filters', 'byGenre']) genreFilter$: Observable<GenreType[]>;
+
+    @select(['pages', 'movieListPage', 'filters']) filters$: Observable<IMovieListFilters>;
+
+    genres = Object.keys(genreType);
 
     constructor(private service: MoviesApiService,
                 private actions: MovieListPageActions
@@ -23,10 +29,15 @@ export class MovieListPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchMovies();
+
+        this.filters$.subscribe((filters) => {
+            console.log('filters changed:', filters);
+            this.fetchMovies(filters);
+        });
     }
 
     fetchMovies(filters?: IMovieListFilters) {
-        this.actions.loadStarted(filters);
+        this.actions.loadStarted();
         this.service.list(filters)
             .subscribe(
                 (movies) => this.actions.loadSucceeded(movies),
@@ -36,6 +47,11 @@ export class MovieListPageComponent implements OnInit {
     }
 
     onNameFilterChange(value: string) {
-        this.fetchMovies(!!value ? { byName: value } : null);
+        this.actions.setNameFilter(value);
+    }
+
+    onGenreFilterChange(e) {
+        console.log(e);
+        this.actions.setGenreFilter(e.srcElement.value, e.srcElement.checked);
     }
 }

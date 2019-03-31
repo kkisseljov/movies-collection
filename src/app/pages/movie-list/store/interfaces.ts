@@ -1,3 +1,5 @@
+import { GenreType } from '../../../api/movies/movie.model';
+
 export interface IMovieListPageState {
   movies: any[];
   filters: IMovieListFilters;
@@ -6,5 +8,5 @@ export interface IMovieListPageState {
 
 export interface IMovieListFilters {
     byName?: string;
-    byGenre?: string[];
+    byGenre?: GenreType[];
 }

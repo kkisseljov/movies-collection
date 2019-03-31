@@ -22,10 +22,21 @@ export class MoviesApiService {
     list(filters?: IMovieListFilters): Observable<IMovie[]> {
         return of(movies)
             .map((movies: IMovie[]) => {
-                if(!!filters && !!filters.byName) {
-                    movies = movies.filter(m =>
-                        m.name.toLowerCase().includes(filters.byName.toLowerCase())
-                    );
+                if(!!filters) {
+
+                    if (!!filters.byName) {
+                        movies = movies.filter(m =>
+                            m.name.toLowerCase().includes(filters.byName.toLowerCase())
+                        );
+                    }
+
+                    if (!!filters.byGenre && filters.byGenre.length) {
+                        movies = movies.filter(m => {
+                                let matchedGenres = m.genres.filter(g => filters.byGenre.includes(g));
+                                return matchedGenres.length;
+                            }
+                        );
+                    }
                 }
 
                 return movies;
