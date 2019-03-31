@@ -1,20 +1,21 @@
-import { Output, EventEmitter, Component, OnInit } from '@angular/core';
+import { Output, EventEmitter, Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'search-bar',
-  templateUrl: './component.html',
+    selector: 'search-bar',
+    templateUrl: './component.html',
 })
 export class SearchBarComponent implements OnInit {
-  @Output() onSearch$ = new EventEmitter<string>();
+    @Input() value = '';
+    @Output() onSearch$ = new EventEmitter<string>();
 
-  searchInputControl = new FormControl();
+    searchInputControl = new FormControl();
 
-  ngOnInit() {
-    this.searchInputControl
-      .valueChanges
-      .distinctUntilChanged()
-      .debounceTime(400)
-      .subscribe((value) => this.onSearch$.emit(value));
-  }
+    ngOnInit() {
+        this.searchInputControl
+            .valueChanges
+            .distinctUntilChanged()
+            .debounceTime(400)
+            .subscribe((value) => this.onSearch$.emit(value));
+    }
 }

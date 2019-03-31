@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { movies } from './movie.mock-data';
 import { IMovie } from './movie.model';
+import { IMovieListFilters } from '../../pages/movie-list/store/interfaces';
 
 import 'rxjs/add/operator/delay';
 
@@ -18,8 +19,17 @@ export class MoviesApiService {
             .delay(this.getDelayTime());
     }
 
-    list(): Observable<IMovie[]> {
+    list(filters?: IMovieListFilters): Observable<IMovie[]> {
         return of(movies)
+            .map((movies: IMovie[]) => {
+                if(!!filters && !!filters.byName) {
+                    movies = movies.filter(m =>
+                        m.name.toLowerCase().includes(filters.byName.toLowerCase())
+                    );
+                }
+
+                return movies;
+            })
             .delay(this.getDelayTime());
     }
 }

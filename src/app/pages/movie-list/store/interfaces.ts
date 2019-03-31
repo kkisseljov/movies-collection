@@ -1,8 +1,10 @@
 export interface IMovieListPageState {
   movies: any[];
-  filters: {
-    byName: string;
-    byGenre: string[];
-  };
+  filters: IMovieListFilters;
   loading: boolean;
+}
+
+export interface IMovieListFilters {
+    byName?: string;
+    byGenre?: string[];
 }

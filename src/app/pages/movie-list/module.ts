@@ -8,12 +8,18 @@ import { ApiModule } from '../../api/module';
 import { MovieListPageActions } from './store/actions';
 
 @NgModule({
-  declarations: [
-    MovieListPageComponent,
-    MovieItemComponent,
-  ],
-  exports: [MovieListPageComponent],
-  imports: [StoreModule, CoreModule, CommonModule, ApiModule],
-  providers: [MovieListPageActions]
+    declarations: [
+        MovieListPageComponent,
+        MovieItemComponent,
+    ],
+    exports: [MovieListPageComponent],
+    imports: [
+        StoreModule,
+        CoreModule,
+        CommonModule,
+        ApiModule
+    ],
+    providers: [MovieListPageActions]
 })
-export class MovieListPageModule {}
+export class MovieListPageModule {
+}

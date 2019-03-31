@@ -1,4 +1,6 @@
-<search-bar></search-bar>
+<search-bar [value]="nameFilter$"
+            (onSearch$)="onNameFilterChange($event)"
+></search-bar>
 <div class="movie-grid">
     <movie-item *ngFor="let movie of movies$ | async" [movie]="movie"></movie-item>
 </div>

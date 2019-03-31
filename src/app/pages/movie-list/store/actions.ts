@@ -14,7 +14,10 @@ export class MovieListPageActions {
     static readonly LOAD_FAILED = 'MOVIE_LIST_LOAD_FAILED';
 
     @dispatch()
-    loadStarted = () => ({type: MovieListPageActions.LOAD_START});
+    loadStarted = (filters?: any) => ({
+        type: MovieListPageActions.LOAD_START,
+        payload: {filters},
+    });
 
     @dispatch()
     loadSucceeded = (movies: IMovie[]) => ({
@@ -26,5 +29,5 @@ export class MovieListPageActions {
     loadFailed = (error: any) => ({
         type: MovieListPageActions.LOAD_FAILED,
         payload: {error},
-    })
+    });
 }
