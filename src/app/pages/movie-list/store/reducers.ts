@@ -1,5 +1,6 @@
-import { MovieListPageAction, MovieListPageActions } from './actions';
+import { MovieListPageActions } from './actions';
 import { IMovieListPageState } from './interfaces';
+import { StoreAction } from '../../../store/model';
 
 const MOVIE_LIST_PAGE_INITIAL_STATE: IMovieListPageState = {
     movies: [],
@@ -10,17 +11,19 @@ const MOVIE_LIST_PAGE_INITIAL_STATE: IMovieListPageState = {
     loading: false,
 };
 
-export const movieListPageReducers = (
+export const movieListPageReducer = (
     state: IMovieListPageState = MOVIE_LIST_PAGE_INITIAL_STATE,
-    action: MovieListPageAction   //TODO needs some types
+    action: StoreAction
 ) => {
     switch (action.type) {
         case MovieListPageActions.LOAD_START:
             return {...state,
                 loading: true,
             };
+
         case MovieListPageActions.LOAD_SUCCEEDED:
             return {...state, movies: action.payload.movies, loading: false};
+
         case MovieListPageActions.LOAD_FAILED:
             return {...state};  //TODO add error here as soon as some error component is ready
 

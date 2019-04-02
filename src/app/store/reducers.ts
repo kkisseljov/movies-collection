@@ -1,10 +1,12 @@
-import { combineReducers, Action } from 'redux';
+import { combineReducers } from 'redux';
 import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
-import { movieListPageReducers } from '../pages/movie-list/store/reducers';
+import { movieListPageReducer } from '../pages/movie-list/store/reducers';
+import { movieDetailPageReducer } from '../pages/movie-detail/store/reducers';
 
 const pageReducers = combineReducers({
-    movieListPage: movieListPageReducers,
+    movieListPage: movieListPageReducer,
+    movieDetailPage: movieDetailPageReducer,
 });
 
 export const rootReducer = composeReducers(

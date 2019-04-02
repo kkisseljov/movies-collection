@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
 import { GenreType, IMovie } from '../../../api/movies/movie.model';
-import { Action } from 'redux';
-
-export interface MovieListPageAction extends Action {
-    payload?: any;
-}
+import { UPDATE_LOCATION } from '@angular-redux/router';
 
 @Injectable()
 export class MovieListPageActions {
@@ -45,4 +41,9 @@ export class MovieListPageActions {
         payload: { genre, checked },
     });
 
+    @dispatch()
+    goToMovieDetailPage = (movieId: number) => ({
+        type: UPDATE_LOCATION,
+        payload: '/movie-detail?id=' + movieId,
+    });
 }

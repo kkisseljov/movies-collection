@@ -1,3 +1,4 @@
-<div>
-  MOVIE-DETAIL
-</div>
+<movie-detail-view *ngIf="movie$ | async"
+                   [movie]="buildMovieModel(movie$ | async)"
+></movie-detail-view>
+<div>Loading: {{loading$ | async}}</div>

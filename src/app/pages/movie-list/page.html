@@ -4,11 +4,17 @@
 <div class="movie-filters">
     <div class="genre-filter-label">Filter by genres:</div>
     <div class="genre-checkbox" *ngFor="let genre of genres">
-        <input type="checkbox" [value]="genre" (change)="onGenreFilterChange($event)">
+        <input type="checkbox"
+               [value]="genre"
+               (change)="onGenreFilterChange($event)"
+        >
         {{genre}}
     </div>
 </div>
 <div class="movie-grid">
-    <movie-item *ngFor="let movie of movies$ | async" [movie]="movie"></movie-item>
+    <movie-item *ngFor="let movie of movies$ | async"
+                [movie]="buildMovieModel(movie)"
+                (click)="onMovieClick(movie)"
+    ></movie-item>
 </div>
 <div>Loading: {{loading$ | async}}</div>

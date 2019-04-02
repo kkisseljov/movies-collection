@@ -1,17 +1,17 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { select } from '@angular-redux/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
 import { MovieListPageActions } from './store/actions';
-import { GenreType, genreType, IMovie } from '../../api/movies/movie.model';
+import { GenreType, genreType, IMovie, Movie } from '../../api/movies/movie.model';
 import { IMovieListFilters } from './store/interfaces';
 
 @Component({
-    selector: 'movie-list',
+    selector: 'movie-list-page',
     templateUrl: './page.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieListPageComponent implements OnInit {
+export class MovieListPageComponent implements OnInit, OnDestroy {
     @select(['pages', 'movieListPage', 'movies']) movies$: Observable<IMovie[]>;
     @select(['pages', 'movieListPage', 'loading']) loading$: Observable<boolean>;
 
@@ -22,6 +22,9 @@ export class MovieListPageComponent implements OnInit {
 
     genres = Object.keys(genreType);
 
+    private filterSubscription: Subscription;
+    private buildMovieModel = (data: IMovie) => !!data ? new Movie(data) : null;
+
     constructor(private service: MoviesApiService,
                 private actions: MovieListPageActions
     ) {
@@ -30,10 +33,14 @@ export class MovieListPageComponent implements OnInit {
     ngOnInit(): void {
         this.fetchMovies();
 
-        this.filters$.subscribe((filters) => {
-            console.log('filters changed:', filters);
+        this.filterSubscription = this.filters$.subscribe((filters) => {
             this.fetchMovies(filters);
         });
+    }
+
+    ngOnDestroy(): void {
+        this.filterSubscription.unsubscribe();
+        this.filterSubscription = null;
     }
 
     fetchMovies(filters?: IMovieListFilters) {
@@ -51,7 +58,11 @@ export class MovieListPageComponent implements OnInit {
     }
 
     onGenreFilterChange(e) {
-        console.log(e);
         this.actions.setGenreFilter(e.srcElement.value, e.srcElement.checked);
+    }
+
+    onMovieClick(e) {
+        console.log('movie clicked:', e);
+        this.actions.goToMovieDetailPage(e.id);
     }
 }

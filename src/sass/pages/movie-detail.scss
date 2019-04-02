@@ -1,0 +1,19 @@
+movie-list-page {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+movie-detail-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    //&__fields {       //TODO for some reason parent selector doesn't work :(
+    .movie-detail-view__fields {
+        max-width: calc(100% - 182px - 48px);
+        min-width: 200px;
+        padding: 24px 24px;
+
+        line-height: 30px;
+    }
+}

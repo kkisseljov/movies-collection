@@ -1,6 +1,8 @@
-movie-list {
+movie-list-page {
 
     search-bar {
+        width: 100%;
+
         display: flex;
         margin: 12px auto;
         padding: 12px 28px;
@@ -9,6 +11,7 @@ movie-list {
     .movie-filters {
         display: flex;
         flex-wrap: wrap;
+
         margin: 12px 28px;
         padding: 12px 28px;
 
@@ -43,7 +46,9 @@ movie-item {
 
     border: 2px solid darkgrey;
 
-    .movie-detail-content {
+    cursor: pointer;
+
+    .movie-item-content {
         img {
             width: 100%;
             margin-left: auto;

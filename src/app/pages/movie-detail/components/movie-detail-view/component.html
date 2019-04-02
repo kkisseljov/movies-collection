@@ -1,0 +1,9 @@
+<img *ngIf="!!movie.img" [src]="movie.getImagePath()"/>
+<div class="movie-detail-view__fields">
+    <b>Name:</b> {{movie.name}} <br>
+    <b>Description:</b> {{movie.description}} <br>
+    <b>Key:</b> {{movie.key}} <br>
+    <b>Rate:</b> {{movie.rate}} <br>
+    <b>Length:</b> {{movie.length}} <br>
+    <b>Genres:</b> {{movie.getGenresText()}} <br>
+</div>

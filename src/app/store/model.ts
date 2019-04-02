@@ -1,4 +1,6 @@
 import { IMovieListPageState } from '../pages/movie-list/store/interfaces';
+import { IMovieDetailPageState } from '../pages/movie-detail/store/interfaces';
+import { Action } from 'redux';
 
 export interface IAppState {
   routes?: any;
@@ -10,6 +12,6 @@ export interface IAppPages {
   movieDetailPage: IMovieDetailPageState;
 }
 
-export interface IMovieDetailPageState {
-  movie: any;
+export interface StoreAction extends Action {
+    payload?: any;
 }
