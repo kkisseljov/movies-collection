@@ -1,4 +1,6 @@
 movie-list-page {
+    display: flex;
+    flex-wrap: wrap;
 
     search-bar {
         width: 100%;
@@ -39,9 +41,9 @@ movie-item {
     //movie cover: 268x182
 
     width: 182px + 24px;
-    height: 268px;
+    height: min-content;
 
-    padding: 12px 12px 115px;
+    padding: 12px 12px;
     margin: 12px auto;
 
     border: 2px solid darkgrey;

@@ -21,11 +21,13 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
     private buildMovieModel = (data: IMovie) => !!data ? new Movie(data) : null;
 
     constructor(private service: MoviesApiService,
-                private actions: MovieDetailPageActions
+                private actions: MovieDetailPageActions,
     ) {
     }
 
     ngOnInit(): void {
+        this.actions.loadStarted();
+
         this.routerSubscription = this.router$
             .subscribe((route: string) => {
                 this.fetchMovie(this.retrieveIdFromUrl(route));
@@ -43,7 +45,7 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
     }
 
     fetchMovie(id: number) {
-        if(!id) {
+        if(!id) {   //TODO doesn't seem to work
             this.actions.loadFailed({ message: 'Invalid ID!'});
 
             return;

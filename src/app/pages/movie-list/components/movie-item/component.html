@@ -1,5 +1,5 @@
 <div class="movie-item-content" *ngIf="!!movie">
     <img *ngIf="!!movie.img" [src]="movie.getImagePath()"/>
     <p>{{movie.name}}</p>
-    <p>{{movie.rate}}</p>
+    <p><b>Genres:</b> {{movie.getGenresText()}}</p>
 </div>

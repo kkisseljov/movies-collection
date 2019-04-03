@@ -31,8 +31,6 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.fetchMovies();
-
         this.filterSubscription = this.filters$.subscribe((filters) => {
             this.fetchMovies(filters);
         });

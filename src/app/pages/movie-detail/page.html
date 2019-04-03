@@ -1,4 +1,4 @@
+<loading-spinner *ngIf="loading$ | async"></loading-spinner>
 <movie-detail-view *ngIf="movie$ | async"
                    [movie]="buildMovieModel(movie$ | async)"
 ></movie-detail-view>
-<div>Loading: {{loading$ | async}}</div>

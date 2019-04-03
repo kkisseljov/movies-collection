@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { SearchBarComponent } from './search-bar/component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from "./loading-spinner/component";
 
 @NgModule({
-  declarations: [
-    SearchBarComponent,
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    SearchBarComponent,
-  ],
+    declarations: [
+        SearchBarComponent,
+        LoadingSpinnerComponent,
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        SearchBarComponent,
+        LoadingSpinnerComponent,
+    ],
 })
-export class CoreModule {}
+export class CoreModule {
+}

@@ -2,6 +2,7 @@
 @import './pages/movie-list';
 @import './pages/movie-detail';
 @import './core/search-bar';
+@import './core/loading-spinner';
 
 body {
     max-width: 900px;

@@ -17,4 +17,4 @@
                 (click)="onMovieClick(movie)"
     ></movie-item>
 </div>
-<div>Loading: {{loading$ | async}}</div>
+<loading-spinner *ngIf="loading$ | async"></loading-spinner>
