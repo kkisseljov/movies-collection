@@ -4,6 +4,20 @@
 @import './core/search-bar';
 @import './core/loading-spinner';
 
+.active {
+    background: #EEE;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+content {
+    display: block;
+    padding: 10px;
+    border: solid gray 1px;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
 body {
     max-width: 900px;
     min-height: 600px;

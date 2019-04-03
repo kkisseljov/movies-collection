@@ -22,6 +22,10 @@ export const movieListPageReducer = (
         case MovieListPageActions.LOAD_SUCCEEDED:
             const currentPage = action.payload.results.pagination.pageNumber;
             let movies = state.movies;
+
+            //There is a way to mess up with events and get many calls for this action
+            //which makes the list having many duplicates
+            //TODO fix events or improve this check to clear this situation
             if(!movies.length || currentPage > 1) {
                 movies.push(...action.payload.results.movies);
             }
