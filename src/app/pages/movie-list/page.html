@@ -14,7 +14,7 @@
 </div>
 <div class="movie-grid">
     <movie-item *ngFor="let movie of movies$ | async"
-                [movie]="buildMovieModel(movie)"
+                [movie]="movie"
                 (click)="onMovieClick(movie)"
     ></movie-item>
 </div>

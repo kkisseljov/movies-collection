@@ -13,13 +13,23 @@ export const movieListPageReducer = (
 ) => {
     switch (action.type) {
         case MovieListPageActions.LOAD_START:
+            console.log('action.payload.clearList:', action.payload.clearList);
             return {...state,
                 loading: true,
-                movies: [],
+                movies: action.payload.clearList ? [] : state.movies,
             };
 
         case MovieListPageActions.LOAD_SUCCEEDED:
-            return {...state, movies: action.payload.movies, loading: false};
+            const currentPage = action.payload.results.pagination.pageNumber;
+            let movies = state.movies;
+            if(!movies.length || currentPage > 1) {
+                movies.push(...action.payload.results.movies);
+            }
+
+            return {...state,
+                movies,
+                loading: false
+            };
 
         case MovieListPageActions.LOAD_FAILED:
             return {...state};  //TODO add error here as soon as some error component is ready

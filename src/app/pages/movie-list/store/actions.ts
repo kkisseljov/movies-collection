@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
-import { IMovie } from '../../../api/movies/movie.model';
+import { IMovie, IPaginatedMovieList } from '../../../api/movies/movie.model';
 import { UPDATE_LOCATION } from '@angular-redux/router';
 import { filtersToUrlParams } from './route-params';
 import { IMovieListFilters } from './interfaces';
@@ -12,14 +12,15 @@ export class MovieListPageActions {
     static readonly LOAD_FAILED = 'MOVIE_LIST_LOAD_FAILED';
 
     @dispatch()
-    loadStarted = () => ({
+    loadStarted = (clearList: boolean = true) => ({
         type: MovieListPageActions.LOAD_START,
+        payload: { clearList },
     });
 
     @dispatch()
-    loadSucceeded = (movies: IMovie[]) => ({
+    loadSucceeded = (results: IPaginatedMovieList) => ({
         type: MovieListPageActions.LOAD_SUCCEEDED,
-        payload: { movies },
+        payload: { results },
     });
 
     @dispatch()

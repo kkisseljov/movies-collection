@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { movies } from './movie.mock-data';
-import { IMovie } from './movie.model';
+import { IMovie, IPaginatedMovieList, Movie, Pagination } from './movie.model';
 import { IMovieListFilters } from '../../pages/movie-list/store/interfaces';
 
 import 'rxjs/add/operator/delay';
@@ -19,7 +19,7 @@ export class MoviesApiService {
             .delay(this.getDelayTime());
     }
 
-    list(filters?: IMovieListFilters): Observable<IMovie[]> {
+    list(filters?: IMovieListFilters, page: number = 1): Observable<IPaginatedMovieList> {
         return of(movies)
             .map((movies: IMovie[]) => {
                 if(!!filters) {
@@ -40,6 +40,22 @@ export class MoviesApiService {
                 }
 
                 return movies;
+            })
+            .map((movies: IMovie[]) => {
+                let pagination = new Pagination({
+                    pageNumber: page,
+                    perPage: 6,
+                    pageCount: Math.ceil(movies.length / 6),
+                    totalRecords: movies.length,
+                });
+
+                const { start, end } = pagination.getRecordIndexes();
+                return {
+                    movies: movies
+                        .slice(start, end)
+                        .map((m) => new Movie(m)),
+                    pagination,
+                } as IPaginatedMovieList;
             })
             .delay(this.getDelayTime());
     }

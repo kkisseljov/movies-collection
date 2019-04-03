@@ -57,3 +57,44 @@ export class Movie implements IMovie {
         return this.genres.join(', ');
     }
 }
+
+export interface IPaginatedMovieList {
+    movies: Movie[];
+    pagination: Pagination;
+}
+
+export interface IPagination {
+    pageNumber: number;
+    pageCount: number;
+    perPage: number;
+    totalRecords: number;
+}
+
+export class Pagination implements IPagination {
+    pageNumber: number;
+    pageCount: number;
+    perPage: number;
+    totalRecords: number;
+
+    constructor(data: IPagination) {
+        this.pageNumber = data.pageNumber;
+        this.pageCount = data.pageCount;
+        this.perPage = data.perPage;
+        this.totalRecords = data.totalRecords;
+
+        if(this.pageNumber > this.pageCount) {
+            this.pageNumber = this.pageCount;
+        }
+    }
+
+    isLastPage() {
+        return this.pageNumber === this.pageCount;
+    }
+
+    getRecordIndexes() {
+        return {
+            start: (this.pageNumber - 1) * this.perPage,
+            end: this.pageNumber * this.perPage,
+        }
+    }
+}

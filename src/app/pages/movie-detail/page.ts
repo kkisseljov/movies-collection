@@ -27,10 +27,9 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.routerSubscription = this.router$
+            .filter((route: string) => route.includes('movie-detail'))
             .subscribe((route: string) => {
-                if(route.includes('movie-detail')) {
-                    this.fetchMovie(this.retrieveIdFromUrl(route));
-                }
+                this.fetchMovie(this.retrieveIdFromUrl(route));
             });
     }
 

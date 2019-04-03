@@ -30,6 +30,8 @@ export function filtersFromUrl(url: string): IMovieListFilters {
     }
 
     const params = url.substring(1).split('&');
+    const nameParam = 'name=';
+    const genreParam = 'genres[]=';
 
     let filters = {
         byName: null,
@@ -37,12 +39,12 @@ export function filtersFromUrl(url: string): IMovieListFilters {
     } as IMovieListFilters;
 
     params.forEach((param) => {
-        if(param.includes('name=')) {
-            filters.byName = param.substring(5);
+        if(param.includes(nameParam)) {
+            filters.byName = param.substring(nameParam.length);
         }
 
-        if(param.includes('genres[]=')) {
-            filters.byGenre.push(param.substring(9) as GenreType)
+        if(param.includes(genreParam)) {
+            filters.byGenre.push(param.substring(genreParam.length) as GenreType)
         }
     });
 
