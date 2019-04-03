@@ -45,19 +45,20 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
     }
 
     fetchMovie(id: number) {
-        if(!id) {   //TODO doesn't seem to work
+        if(id > 0) {
+
+            this.actions.loadStarted();
+            this.service.view(id)
+                .subscribe(
+                    (movie) => this.actions.loadSucceeded(movie),
+                    (err) => console.error('error:', err),
+                    () => console.log('fetch completed')
+                );
+        } else {
             this.actions.loadFailed({ message: 'Invalid ID!'});
 
             return;
         }
-
-        this.actions.loadStarted();
-        this.service.view(id)
-            .subscribe(
-                (movie) => this.actions.loadSucceeded(movie),
-                (err) => console.error('error:', err),
-                () => console.log('fetch completed')
-            );
     }
 
     onBackButtonClick() {

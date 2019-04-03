@@ -1,10 +1,11 @@
-<search-bar [value]="nameFilter$"
+<search-bar [value]="filters.byName"
             (onSearch$)="onNameFilterChange($event)"
 ></search-bar>
 <div class="movie-filters">
     <div class="genre-filter-label">Filter by genres:</div>
     <div class="genre-checkbox" *ngFor="let genre of genres">
         <input type="checkbox"
+               [checked]="isGenreChecked(genre)"
                [value]="genre"
                (change)="onGenreFilterChange($event)"
         >
