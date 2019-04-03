@@ -15,6 +15,7 @@ export const movieDetailPageReducer = (
         case MovieDetailPageActions.LOAD_START:
             return {...state,
                 loading: true,
+                movie: null,
             };
 
         case MovieDetailPageActions.LOAD_SUCCEEDED:

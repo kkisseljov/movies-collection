@@ -1,6 +1,12 @@
 movie-detail-page {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
+    .back-button {
+        margin-left: auto;
+        width: 150px;
+        height: 30px;
+    }
 }
 
 movie-detail-view {

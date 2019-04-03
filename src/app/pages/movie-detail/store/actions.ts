@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
 import { IMovie } from '../../../api/movies/movie.model';
+import { UPDATE_LOCATION } from '@angular-redux/router';
 
 @Injectable()
 export class MovieDetailPageActions {
@@ -23,5 +24,11 @@ export class MovieDetailPageActions {
     loadFailed = (error: any) => ({
         type: MovieDetailPageActions.LOAD_FAILED,
         payload: { error },
+    });
+
+    @dispatch()
+    goToMovieList = () => ({
+        type: UPDATE_LOCATION,
+        payload: '/movie-list',
     });
 }

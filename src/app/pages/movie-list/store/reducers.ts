@@ -19,6 +19,7 @@ export const movieListPageReducer = (
         case MovieListPageActions.LOAD_START:
             return {...state,
                 loading: true,
+                movies: [],
             };
 
         case MovieListPageActions.LOAD_SUCCEEDED:

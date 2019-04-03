@@ -26,11 +26,11 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.actions.loadStarted();
-
         this.routerSubscription = this.router$
             .subscribe((route: string) => {
-                this.fetchMovie(this.retrieveIdFromUrl(route));
+                if(route.includes('movie-detail')) {
+                    this.fetchMovie(this.retrieveIdFromUrl(route));
+                }
             });
     }
 
@@ -41,7 +41,7 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
 
     retrieveIdFromUrl(url: string) {
         const match = url.match(/(?<=\\?id=).*/);
-        return match.length ? +match[0] : -1;
+        return !!match && match.length ? +match[0] : -1;
     }
 
     fetchMovie(id: number) {
@@ -58,5 +58,9 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
                 (err) => console.error('error:', err),
                 () => console.log('fetch completed')
             );
+    }
+
+    onBackButtonClick() {
+        this.actions.goToMovieList();
     }
 }
