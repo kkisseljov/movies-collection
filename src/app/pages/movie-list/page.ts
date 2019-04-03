@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, HostListener, EventEmitter } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { Observable, Subscription } from 'rxjs';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
@@ -21,9 +21,13 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
 
     genres = Object.keys(genreType);
 
-    private routeSubscription: Subscription;
     private filters: IMovieListFilters = { byName: null, byGenre: [] } as IMovieListFilters;
     private pagination: Pagination;
+
+    private infiniteScroll$: EventEmitter<any> = new EventEmitter<any>();
+
+    private infiniteScrollSubscription: Subscription;
+    private routeSubscription: Subscription;
 
     constructor(private service: MoviesApiService,
                 private actions: MovieListPageActions
@@ -39,21 +43,15 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
         } = document.documentElement;
 
         if(scrollTop + clientHeight == scrollHeight) {
-            console.log('reached bottom:', this.pagination);
-
-            //TODO need to block it somehow when loading is in progress
-            if(this.pagination && !this.pagination.isLastPage()) {
-                this.actions.loadStarted(false);
-                this.fetchMovies(this.filters, ++this.pagination.pageNumber);
-            }
+            this.infiniteScroll$.emit();
         }
     }
 
     ngOnInit(): void {
         this.routeSubscription = this.router$
-            .filter((route: string) => route.includes('movie-list'))
+            .filter((route: string) => route.includes('/movie-list'))
             .subscribe((route: string) => {
-                const params = route.substring('movie-list'.length + 1);
+                const params = route.substring('/movie-list'.length);
 
                 this.filters = filtersFromUrl(params);
                 this.pagination = null;
@@ -61,18 +59,31 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
                 this.actions.loadStarted(true);
                 this.fetchMovies(this.filters);
             });
+
+        //Wait until loading is finished when we are scrolling to bottom of the screen
+        //to fetch the next part of movies if there are more to get
+        this.infiniteScrollSubscription = this.infiniteScroll$
+            .flatMap(() => this.loading$)
+            .subscribe((loading) => {
+                if(!loading && this.pagination && !this.pagination.isLastPage()) {
+                    this.actions.loadStarted(false);
+                    this.fetchMovies(this.filters, ++this.pagination.pageNumber);
+                }
+            });
     }
 
     ngOnDestroy(): void {
         this.routeSubscription.unsubscribe();
         this.routeSubscription = null;
+
+        this.infiniteScrollSubscription.unsubscribe();
+        this.infiniteScrollSubscription = null;
     }
 
     fetchMovies(filters?: IMovieListFilters, page = 1) {
         this.service.list(filters, page)
             .subscribe(
                 (results) => {
-                    console.log('fetch results:', results);
                     this.pagination = results.pagination;
                     this.actions.loadSucceeded(results);
                 },
