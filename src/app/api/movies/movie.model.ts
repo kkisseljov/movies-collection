@@ -1,18 +1,18 @@
-export type GenreType = "action" | "adventure" | "biography" | "comedy" | "crime"
-	| "drama" | "history" | "mystery" | "scifi" | "sport" | "thriller";
+export type GenreType = 'action' | 'adventure' | 'biography' | 'comedy' | 'crime'
+	| 'drama' | 'history' | 'mystery' | 'scifi' | 'sport' | 'thriller';
 
 export const genreType = {
-	action: "action" as GenreType,
-	adventure: "adventure" as GenreType,
-	biography: "biography" as GenreType,
-	comedy: "comedy" as GenreType,
-	crime: "crime" as GenreType,
-	drama: "drama" as GenreType,
-	history: "history" as GenreType,
-	mystery: "mystery" as GenreType,
-	scifi: "scifi" as GenreType,
-	sport: "sport" as GenreType,
-	thriller: "thriller" as GenreType
+	action: 'action' as GenreType,
+	adventure: 'adventure' as GenreType,
+	biography: 'biography' as GenreType,
+	comedy: 'comedy' as GenreType,
+	crime: 'crime' as GenreType,
+	drama: 'drama' as GenreType,
+	history: 'history' as GenreType,
+	mystery: 'mystery' as GenreType,
+	scifi: 'scifi' as GenreType,
+	sport: 'sport' as GenreType,
+	thriller: 'thriller' as GenreType
 };
 
 export const MOVIE_IMAGES_PATH = 'assets/images/movie-covers/';
@@ -82,7 +82,7 @@ export class Pagination implements IPagination {
         this.perPage = data.perPage;
         this.totalRecords = data.totalRecords;
 
-        if(this.pageNumber > this.pageCount) {
+        if (this.pageNumber > this.pageCount) {
             this.pageNumber = this.pageCount;
         }
     }
@@ -94,7 +94,9 @@ export class Pagination implements IPagination {
     getRecordIndexes() {
         return {
             start: (this.pageNumber - 1) * this.perPage,
-            end: this.pageNumber * this.perPage,
+            end: this.isLastPage()
+                ? this.totalRecords - 1
+                : this.pageNumber * this.perPage,
         }
     }
 }

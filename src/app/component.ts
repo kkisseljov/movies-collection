@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'app-root',
+    selector: 'mcl-root',
     templateUrl: './component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

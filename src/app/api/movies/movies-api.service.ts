@@ -22,7 +22,7 @@ export class MoviesApiService {
     list(filters?: IMovieListFilters, page: number = 1): Observable<IPaginatedMovieList> {
         return of(movies)
             .map((movies: IMovie[]) => {
-                if(!!filters) {
+                if (!!filters) {
 
                     if (!!filters.byName) {
                         movies = movies.filter(m =>
@@ -32,7 +32,7 @@ export class MoviesApiService {
 
                     if (!!filters.byGenre && filters.byGenre.length) {
                         movies = movies.filter(m => {
-                                let matchedGenres = m.genres.filter(g => filters.byGenre.includes(g));
+                                const matchedGenres = m.genres.filter(g => filters.byGenre.includes(g));
                                 return matchedGenres.length;
                             }
                         );
@@ -42,14 +42,14 @@ export class MoviesApiService {
                 return movies;
             })
             .map((movies: IMovie[]) => {
-                let pagination = new Pagination({
+                const pagination = new Pagination({
                     pageNumber: page,
                     perPage: 6,
                     pageCount: Math.ceil(movies.length / 6),
                     totalRecords: movies.length,
                 });
 
-                const { start, end } = pagination.getRecordIndexes();
+                const {start, end} = pagination.getRecordIndexes();
                 return {
                     movies: movies
                         .slice(start, end)

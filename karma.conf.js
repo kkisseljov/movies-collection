@@ -3,7 +3,7 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: 'movies-collection',
+    basePath: '',   //'movies-collection',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
       require('karma-jasmine'),
@@ -13,7 +13,7 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     client:{
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: true // false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
       { pattern: './src/test.ts', watched: false }

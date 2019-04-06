@@ -1,6 +1,6 @@
 import { IMovieDetailPageState } from './interfaces';
-import { StoreAction } from "../../../store/model";
-import { MovieDetailPageActions } from "./actions";
+import { StoreAction } from '../../../store/model';
+import { MovieDetailPageActions } from './actions';
 
 const MOVIE_DETAIL_PAGE_INITIAL_STATE: IMovieDetailPageState = {
     movie: null,
@@ -22,7 +22,7 @@ export const movieDetailPageReducer = (
             return {...state, movie: action.payload.movie, loading: false};
 
         case MovieDetailPageActions.LOAD_FAILED:
-            return {...state};  //TODO add error here as soon as some error component is ready
+            return {...state};  // TODO add error here as soon as some error component is ready
 
         default:
             return state;

@@ -1,5 +1,5 @@
 <button class="back-button" (click)="onBackButtonClick()">Back to search</button>
-<loading-spinner *ngIf="loading$ | async"></loading-spinner>
-<movie-detail-view *ngIf="movie$ | async"
+<mcl-loading-spinner *ngIf="loading$ | async"></mcl-loading-spinner>
+<mcl-movie-detail-view *ngIf="movie$ | async"
                    [movie]="buildMovieModel(movie$ | async)"
-></movie-detail-view>
+></mcl-movie-detail-view>

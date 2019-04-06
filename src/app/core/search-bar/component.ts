@@ -2,7 +2,7 @@ import { Output, EventEmitter, Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'search-bar',
+    selector: 'mcl-search-bar',
     templateUrl: './component.html',
 })
 export class SearchBarComponent implements OnInit {

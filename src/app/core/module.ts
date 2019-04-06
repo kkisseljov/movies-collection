@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchBarComponent } from './search-bar/component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoadingSpinnerComponent } from "./loading-spinner/component";
+import { LoadingSpinnerComponent } from './loading-spinner/component';
 
 @NgModule({
     declarations: [
