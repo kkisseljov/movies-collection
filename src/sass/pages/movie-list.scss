@@ -1,8 +1,8 @@
-movie-list-page {
+mcl-movie-list-page {
     display: flex;
     flex-wrap: wrap;
 
-    search-bar {
+    mcl-search-bar {
         width: 100%;
 
         display: flex;
@@ -38,7 +38,7 @@ movie-list-page {
     }
 }
 
-movie-item {
+mcl-movie-item {
     //movie cover: 268x182
 
     width: 182px + 24px;
