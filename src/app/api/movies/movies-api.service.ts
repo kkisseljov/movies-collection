@@ -13,15 +13,16 @@ export class MoviesApiService {
 
     getDelayTime = () => 500 + Math.random() * 1000;
 
-    view(id: number): Observable<IMovie> {
+    view(id: number): Observable<Movie> {
         return of(movies)
             .map((movies) => movies.find((m: IMovie) => m.id === id))
+            .map((movie: IMovie) => new Movie(movie))
             .delay(this.getDelayTime());
     }
 
     list(filters?: IMovieListFilters, page: number = 1): Observable<IPaginatedMovieList> {
         return of(movies)
-            .map((movies: IMovie[]) => {
+            .map((movies: IMovie[]) => {        // Apply filters to the list
                 if (!!filters) {
 
                     if (!!filters.byName) {
@@ -41,7 +42,7 @@ export class MoviesApiService {
 
                 return movies;
             })
-            .map((movies: IMovie[]) => {
+            .map((movies: IMovie[]) => {        // Create pagination object
                 const pagination = new Pagination({
                     pageNumber: page,
                     perPage: 6,

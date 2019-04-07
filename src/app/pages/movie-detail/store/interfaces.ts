@@ -1,6 +1,6 @@
-import { IMovie } from '../../../api/movies/movie.model';
+import { Movie } from '../../../api/movies/movie.model';
 
 export interface IMovieDetailPageState {
-    movie?: IMovie;
+    movie?: Movie;
     loading: false;
 }

@@ -5,7 +5,7 @@ import { MoviesApiService } from '../../api/movies/movies-api.service';
 import { MovieListPageActions } from './store/actions';
 import { GenreType, genreType, IMovie, Movie, Pagination } from '../../api/movies/movie.model';
 import { IMovieListFilters } from './store/interfaces';
-import { filtersFromUrl } from './store/route-params';
+import { filtersFromUrlParams } from './store/route-params';
 
 @Component({
     selector: 'mcl-movie-list-page',
@@ -48,18 +48,22 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.routeSubscription = this.router$
-            .filter((route: string) => route.includes('/movie-list'))
-            .subscribe((route: string) => {
-                const params = route.substring('/movie-list'.length);
+        const pageRoute = '/movie-list';
 
-                this.filters = filtersFromUrl(params);
+        this.routeSubscription = this.router$
+            .filter((route: string) => route.includes(pageRoute))
+            .subscribe((route: string) => {
+                const params = route.substring(pageRoute.length);
+
+                this.filters = filtersFromUrlParams(params);
                 this.pagination = null;
 
                 this.actions.loadStarted(true);
                 this.fetchMovies(this.filters);
             });
 
+        // Listen for infinite scroll when page is not in loading state
+        // Fetch next page if needed
         this.infiniteScrollSubscription = this.loading$
             .filter((loading) => !loading)
             .switchMap(() => this.infiniteScroll$)
@@ -97,7 +101,7 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
     }
 
     onGenreFilterChange(e) {
-        const {value, checked} = e.srcElement;
+        const { value, checked } = e.srcElement;
         const byGenre = this.filters.byGenre;
 
         if (checked && !byGenre.includes(value)) {
@@ -108,7 +112,7 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
             byGenre.splice(byGenre.indexOf(value), 1);
         }
 
-        this.actions.updateFilters({...this.filters, byGenre});
+        this.actions.updateFilters({ ...this.filters, byGenre });
     }
 
     onMovieClick(movie: IMovie) {

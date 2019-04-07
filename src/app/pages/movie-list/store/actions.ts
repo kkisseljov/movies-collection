@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
-import { IMovie, IPaginatedMovieList } from '../../../api/movies/movie.model';
+import { IPaginatedMovieList } from '../../../api/movies/movie.model';
 import { UPDATE_LOCATION } from '@angular-redux/router';
 import { filtersToUrlParams } from './route-params';
 import { IMovieListFilters } from './interfaces';

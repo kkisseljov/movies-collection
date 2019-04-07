@@ -45,7 +45,7 @@
     },
     {
       "files": "src/**/*.ts",
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "tests/e2e/tsconfig.e2e.json"
     }
   ],
   "test": {

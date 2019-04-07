@@ -1,7 +1,8 @@
 import { IMovieListFilters } from './interfaces';
 import { GenreType } from '../../../api/movies/movie.model';
 
-//TODO Maybe turn this into a class ?. Params can be mapped in a variable.
+//TODO Maybe turn this into a class ?
+// Params can be mapped in a variable.
 
 export function filtersToUrlParams(filters: IMovieListFilters): string {
     if (!filters) {
@@ -30,7 +31,7 @@ export function filtersToUrlParams(filters: IMovieListFilters): string {
     );
 }
 
-export function filtersFromUrl(url: string): IMovieListFilters {
+export function filtersFromUrlParams(url: string): IMovieListFilters {
     url = decodeURI(url);
 
     if (!url.includes('?')) {
