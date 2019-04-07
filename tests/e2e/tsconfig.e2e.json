@@ -7,6 +7,14 @@
         "types":[
             "jasmine",
             "node"
+        ],
+        // Exists on one of working examples of e2e tests, but it doesn't help anyway
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
         ]
     }
 }

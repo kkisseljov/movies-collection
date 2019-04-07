@@ -1,4 +1,4 @@
-// import { by, browser, element } from 'protractor';
+import { by, browser, element } from 'protractor';
 import { MovieListPage } from './pages/movie-list.page';
 
 describe('TEST', () => {
