@@ -1,6 +1,8 @@
 import { IMovieListFilters } from './interfaces';
 import { GenreType } from '../../../api/movies/movie.model';
 
+//TODO Maybe turn this into a class ?. Params can be mapped in a variable.
+
 export function filtersToUrlParams(filters: IMovieListFilters): string {
     if (!filters) {
         return '';
@@ -19,7 +21,13 @@ export function filtersToUrlParams(filters: IMovieListFilters): string {
         );
     }
 
-    return params.length ? '?' + params.join('&') : '';
+    // If we don't encode it here, redux will do it for us, but an extra UPDATE_LOCATION action will be fired.
+    // This is something I would like to avoid, so encoding it in advance.
+    return encodeURI(
+        params.length
+            ? '?' + params.join('&')
+            : ''
+    );
 }
 
 export function filtersFromUrl(url: string): IMovieListFilters {

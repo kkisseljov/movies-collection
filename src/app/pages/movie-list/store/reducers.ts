@@ -13,7 +13,6 @@ export const movieListPageReducer = (
 ) => {
     switch (action.type) {
         case MovieListPageActions.LOAD_START:
-            console.log('XXX action.payload.clearList:', action.payload.clearList);
             return {
                 ...state,
                 loading: true,
@@ -24,18 +23,9 @@ export const movieListPageReducer = (
             const pagination = action.payload.results.pagination;
             const movies = state.movies;
 
-            // There is a way to mess up with events and get many calls for this action
-            // which makes the list having many duplicates
-            // TODO fix events or improve this check to clear this situation
-            // if(!movies.length || currentPage > 1) {
-            //     movies.push(...action.payload.results.movies);
-            // }
-
-            console.log('XXX.LOAD_SUCCEEDED:', {pagination: {...pagination}, movies: {...movies}});
-
-            if (movies.length < pagination.getRecordIndexes().end + 1) {     // TODO fix this
-                console.log('XXX should add:', action.payload.results.movies);
-                console.log('XXX check:', {moviesLength: movies.length, check: pagination.getRecordIndexes()});
+            // Check that we don't have records from requested page
+            // just for case if the same page is requested several times for some reason
+            if (movies.length < pagination.getRecordIndexes().end) {
                 movies.push(...action.payload.results.movies);
             }
 

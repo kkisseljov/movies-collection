@@ -49,7 +49,7 @@ export class MoviesApiService {
                     totalRecords: movies.length,
                 });
 
-                const {start, end} = pagination.getRecordIndexes();
+                const { start, end } = pagination.getRecordIndexes();
                 return {
                     movies: movies
                         .slice(start, end)

@@ -42,7 +42,7 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
             clientHeight,
         } = document.documentElement;
 
-        if (scrollTop + clientHeight === scrollHeight) {
+        if (scrollHeight !== clientHeight && scrollTop + clientHeight === scrollHeight) {
             this.infiniteScroll$.emit();
         }
     }
@@ -51,8 +51,6 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
         this.routeSubscription = this.router$
             .filter((route: string) => route.includes('/movie-list'))
             .subscribe((route: string) => {
-                console.log('YYY fetch onRouteChange');
-
                 const params = route.substring('/movie-list'.length);
 
                 this.filters = filtersFromUrl(params);
@@ -62,19 +60,14 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
                 this.fetchMovies(this.filters);
             });
 
-        // Wait until loading is finished when we are scrolling to bottom of the screen
-        // to fetch the next part of movies if there are more to get
-        this.infiniteScrollSubscription = this.infiniteScroll$
-            .flatMap(() => this.loading$)
-            // .filter((loading) => !loading)
-            .subscribe((loading) => {
-                if (!loading && this.pagination && !this.pagination.isLastPage()) {
-                    console.log('YYY fetch onInfiniteScroll:', {pagination: {...this.pagination}});
+        this.infiniteScrollSubscription = this.loading$
+            .filter((loading) => !loading)
+            .switchMap(() => this.infiniteScroll$)
+            .subscribe(() => {
+                if (this.pagination && !this.pagination.isLastPage()) {
                     this.actions.loadStarted(false);
                     this.pagination.pageNumber++;
                     this.fetchMovies(this.filters, this.pagination.pageNumber);
-                } else {
-                    console.log('YYY fetch onInfiniteScroll -> ignored:', {loading, pagination: {...this.pagination}});
                 }
             });
     }
