@@ -20,7 +20,11 @@ export const movieDetailPageReducer = (
             };
 
         case MovieDetailPageActions.LOAD_SUCCEEDED:
-            return {...state, movie: action.payload.movie, loading: false};
+            return {
+                ...state,
+                movie: action.payload.movie,
+                loading: false
+            };
 
         case MovieDetailPageActions.LOAD_FAILED:
             return {

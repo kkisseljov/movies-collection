@@ -1,43 +1,39 @@
-# ****REPO DEPRECATED****
+# Installation and launch #
 
-Please note that this repo has been deprecated. Code and issues are being migrated to a monorepo at https://github.com/angular-redux/platform where we are beginning work on a new and improved v10. To file any new issues or see the state of the current code base, we would love to see you there! Thanks for your support!
+Install `node` and `npm` (I used `nvm` for that).
 
-# Example App: Zoo Animals
+Cd into `movies-collection` folder and run `npm i`.
 
-[![CircleCI](https://circleci.com/gh/angular-redux/example-app.svg?style=svg)](https://circleci.com/gh/angular-redux/example-app)
+To launch the project run `npm start`
 
-This is a sample project showing how the following packages work together to make a simple
-application.
+Open http://localhost:4200 in your browser ( I tested only on Chrome )
 
-* [redux](https://github.com/reactjs/redux) Predictable state container for Javascript.
-* [redux-observable](https://github.com/redux-observable/redux-observable) Side-effect handling with Observables
-* [@angular-redux/store](https://github.com/angular-redux/store) Redux + Angular bindings
-* [@angular-redux/router](https://github.com/angular-redux/router) Time travel with the Angular router
-* [@angular-redux/form](https://github.com/angular-redux/form) Time travel with Angular forms
-* [Redux DevTools Chrome Extension](https://github.com/zalmoxisus/redux-devtools-extension)
+## Project details
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.0.
+Used https://github.com/angular-redux/example-app as a starter.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Contains two pages:
+- **Movie list** - has a search bar on top, that looks for matching movie name, and filter by genres. List is paginated and fetched using infinite scroll. Clicking on a movie redirects to movie-detail page.
+- **Movie detail** - shows movie details, which is fetched using id provided as a route parameter. Has a button to return back to movie list.
 
-## Code scaffolding
+There is an error notifier that shows up when providing wrong id for movie detail page
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+## Folder structure
 
-## Build
+**/src/app/api** - contains api service and models
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+**/src/app/core** - contains components common to entire project, which might be reused in many different places
 
-## Running unit tests
+**/src/app/pages** - contains page components and different other content, such as store related files and other components, relevant only to some particular page.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**/src/app/store** - global store
 
-## Running end-to-end tests
+**/src/sass** - all styles for the project, separated by components, are located here
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+**/tests** - all tests are located here. Unit and E2E are in different folders
 
-## Further help
+## Running tests
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run `npm run test` for unit tests. ( Not implemented yet, but karma is set up correctly ).
+
+Run `npm run e2e` for end-to-end tests. ( Not working atm, stuck with tsconfig issues ).

@@ -50,6 +50,8 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         const pageRoute = '/movie-list';
 
+        // I decided to store filter data as route params, so it can be preserved
+        // even after page is reloaded
         this.routeSubscription = this.router$
             .filter((route: string) => route.includes(pageRoute))
             .subscribe((route: string) => {
@@ -91,13 +93,13 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
                     this.pagination = results.pagination;
                     this.actions.loadSucceeded(results);
                 },
-                (err) => console.error('error:', err),
+                (err) => this.actions.loadFailed(err),
                 () => console.log('fetch completed')
             );
     }
 
     onNameFilterChange(value: string) {
-        this.actions.updateFilters({...this.filters, byName: value});
+        this.actions.updateFilters({ ...this.filters, byName: value });
     }
 
     onGenreFilterChange(e) {

@@ -17,7 +17,7 @@ export class MoviesApiService {
         return of(movies)
             .map((movies) => {
                 const movie = movies.find((m: IMovie) => m.id === id);
-                if(!!movie) {
+                if (!!movie) {
                     return new Movie(movie);
                 } else {
                     throw new Error('Not found!');

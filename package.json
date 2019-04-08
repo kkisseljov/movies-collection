@@ -6,8 +6,9 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "test": "ng lint --type-check && ng test --single-run",
-        "e2e": "ng e2e"
+        "test": "ng test --single-run",
+        "e2e": "ng e2e",
+        "lint": "ng lint --type-check"
     },
     "engines": {
         "node": ">=6.9.5"
