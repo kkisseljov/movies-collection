@@ -21,7 +21,7 @@ export class MovieListPageComponent implements OnInit, OnDestroy {
 
     genres = Object.keys(genreType);
 
-    private filters: IMovieListFilters = {byName: null, byGenre: []} as IMovieListFilters;
+    private filters: IMovieListFilters = { byName: null, byGenre: [] } as IMovieListFilters;
     private pagination: Pagination;
 
     private infiniteScroll$: EventEmitter<any> = new EventEmitter<any>();

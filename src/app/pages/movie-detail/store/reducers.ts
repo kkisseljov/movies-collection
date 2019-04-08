@@ -13,7 +13,8 @@ export const movieDetailPageReducer = (
 ) => {
     switch (action.type) {
         case MovieDetailPageActions.LOAD_START:
-            return {...state,
+            return {
+                ...state,
                 loading: true,
                 movie: null,
             };
@@ -22,7 +23,10 @@ export const movieDetailPageReducer = (
             return {...state, movie: action.payload.movie, loading: false};
 
         case MovieDetailPageActions.LOAD_FAILED:
-            return {...state};  // TODO add error here as soon as some error component is ready
+            return {
+                ...state,
+                loading: false,
+            };
 
         default:
             return state;

@@ -10,24 +10,27 @@ import { NgReduxRouterModule } from '@angular-redux/router';
 import { StoreModule } from './store/module';
 import { MovieListPageModule } from './pages/movie-list/module';
 import { MovieDetailPageModule } from './pages/movie-detail/module';
+import { CoreModule } from './core/module';
 
 // Top-level app component constructs.
 import { appRoutes } from './routes';
 import { AppComponent } from './component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    RouterModule.forRoot(appRoutes),
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    NgReduxModule,
-    NgReduxRouterModule,
-    MovieListPageModule,
-    MovieDetailPageModule,
-    StoreModule,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        RouterModule.forRoot(appRoutes),
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        NgReduxModule,
+        NgReduxRouterModule,
+        MovieListPageModule,
+        MovieDetailPageModule,
+        StoreModule,
+        CoreModule,
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

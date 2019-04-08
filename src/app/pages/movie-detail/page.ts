@@ -5,6 +5,7 @@ import { Movie } from '../../api/movies/movie.model';
 import { MoviesApiService } from '../../api/movies/movies-api.service';
 import { MovieDetailPageActions } from './store/actions';
 import { retrieveIdFromUrl } from './store/route-params';
+import { ErrorWellActions } from '../../core/error-well/store/actions';
 
 @Component({
     selector: 'mcl-movie-detail-page',
@@ -22,6 +23,7 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
 
     constructor(private service: MoviesApiService,
                 private actions: MovieDetailPageActions,
+                private errorWellActions: ErrorWellActions,
     ) {
     }
 
@@ -45,11 +47,16 @@ export class MovieDetailPageComponent implements OnInit, OnDestroy {
             this.service.view(id)
                 .subscribe(
                     (movie) => this.actions.loadSucceeded(movie),
-                    (err) => console.error('error:', err),
+                    (err) => {
+                        // Not quite sure if it is a valid practice to trigger an action inside reducer
+                        // So simply triggering them both right here for now
+                        this.actions.loadFailed(err);
+                        this.errorWellActions.show(err.message);
+                    },
                     () => console.log('fetch completed')
                 );
         } else {
-            this.actions.loadFailed({message: 'Invalid ID!'});
+            this.errorWellActions.show('Invalid ID!');
 
             return;
         }

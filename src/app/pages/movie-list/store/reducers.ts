@@ -36,7 +36,10 @@ export const movieListPageReducer = (
             };
 
         case MovieListPageActions.LOAD_FAILED:
-            return {...state};  // TODO add error here as soon as some error component is ready
+            return {
+                ...state,
+                loading: false
+            };
 
         default:
             return state;

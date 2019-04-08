@@ -3,6 +3,7 @@ import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 import { movieListPageReducer } from '../pages/movie-list/store/reducers';
 import { movieDetailPageReducer } from '../pages/movie-detail/store/reducers';
+import { errorWellReducer } from '../core/error-well/store/reducers';
 
 const pageReducers = combineReducers({
     movieListPage: movieListPageReducer,
@@ -14,4 +15,5 @@ export const rootReducer = composeReducers(
     combineReducers({
         router: routerReducer,
         pages: pageReducers,
+        errorWell: errorWellReducer,
     }));

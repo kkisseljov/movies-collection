@@ -5,6 +5,9 @@ import { Action } from 'redux';
 export interface IAppState {
   routes?: any;
   pages?: IAppPages;
+  errorWell?: {
+      message: string;
+  }
 }
 
 export interface IAppPages {

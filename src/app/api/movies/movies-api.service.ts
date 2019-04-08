@@ -15,8 +15,14 @@ export class MoviesApiService {
 
     view(id: number): Observable<Movie> {
         return of(movies)
-            .map((movies) => movies.find((m: IMovie) => m.id === id))
-            .map((movie: IMovie) => new Movie(movie))
+            .map((movies) => {
+                const movie = movies.find((m: IMovie) => m.id === id);
+                if(!!movie) {
+                    return new Movie(movie);
+                } else {
+                    throw new Error('Not found!');
+                }
+            })
             .delay(this.getDelayTime());
     }
 
